@@ -1146,23 +1146,47 @@ a.index-row:focus-visible .index-row__title {
   }
 }
 
-/* Leadership rows: portrait revealed on hover (pointer devices only) */
+/* Leadership rows (Present Body, Patrons, teams) reveal the portrait and the
+   person's name on hover. Desktop + pointer devices only. */
 .person-row__preview {
   display: none;
   grid-column: 4;
+}
+
+.person-row__preview-label {
+  display: grid;
+  gap: 0.1rem;
+  text-align: center;
+}
+
+.person-row__preview-name {
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.person-row__preview-role {
+  font-size: var(--fs-micro);
+  line-height: 1.25;
+  color: var(--muted);
 }
 
 @media (min-width: 1024px) and (hover: hover) {
   /* Four children: num | body | meta | portrait. The portrait column is a fixed
      reservation, so the hover image can never stretch the row. */
   .person-row--preview {
-    --preview-w: clamp(96px, 9vw, 150px);
+    --preview-w: clamp(140px, 11vw, 180px);
     grid-template-columns: auto minmax(0, 1fr) auto var(--preview-w);
     column-gap: clamp(1rem, 2.4vw, 2rem);
   }
 
   .person-row__preview {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
     width: 100%;
     justify-self: end;
     align-self: center;
@@ -1170,6 +1194,10 @@ a.index-row:focus-visible .index-row__title {
     transform: translateY(10px) scale(0.97);
     pointer-events: none;
     transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
+  }
+
+  .person-row__preview .portrait {
+    width: 100%;
   }
 
   .person-row:hover .person-row__preview,

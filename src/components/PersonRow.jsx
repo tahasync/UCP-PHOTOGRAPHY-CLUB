@@ -12,10 +12,11 @@ const canHover = () =>
 /**
  * A person inside a directory list.
  *
- * `showPreview` adds the hover/focus portrait (Present Body leadership rows).
- * Directory lists such as department pages stay compact and link-only, so no
- * invisible image ever reserves vertical space. On touch devices the preview is
- * not rendered at all, so phones never download an image they cannot show.
+ * `showPreview` adds the hover/focus portrait with the person's name
+ * (Present Body, Patrons Body and every team page use it). The number is
+ * always rendered so every directory shares one grid template, and it is
+ * hidden on phones. On touch devices the preview is never rendered, so
+ * phones never download an image they cannot show.
  */
 export default function PersonRow({ member, num, meta, showPreview = false }) {
   const pending = member.nameIsPending ? ' (name to be added)' : '';
@@ -27,11 +28,9 @@ export default function PersonRow({ member, num, meta, showPreview = false }) {
       to={member.path}
       aria-label={`${member.name}${pending}, ${member.position}. Open profile`}
     >
-      {num ? (
-        <span className="index-row__num tnum" aria-hidden="true">
-          {num}
-        </span>
-      ) : null}
+      <span className="index-row__num tnum" aria-hidden="true">
+        {num ?? ''}
+      </span>
 
       <span className="index-row__body">
         <span className="index-row__title">{member.name}</span>
@@ -48,6 +47,10 @@ export default function PersonRow({ member, num, meta, showPreview = false }) {
       {withPreview ? (
         <span className="person-row__preview" aria-hidden="true">
           <Portrait member={member} ratio="4x5" sizes="150px" eager />
+          <span className="person-row__preview-label">
+            <span className="person-row__preview-name">{member.name}</span>
+            <span className="person-row__preview-role">{member.position}</span>
+          </span>
         </span>
       ) : null}
     </Link>

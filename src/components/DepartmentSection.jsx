@@ -11,9 +11,9 @@ export default function DepartmentSection({ department }) {
       </h2>
 
       <ul className="index-list">
-        {department.members.map((member) => (
+        {department.members.map((member, index) => (
           <li key={member.slug}>
-            <PersonRow member={member} />
+            <PersonRow member={member} num={`0${index + 1}`} showPreview />
           </li>
         ))}
       </ul>

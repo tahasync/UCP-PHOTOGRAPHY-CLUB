@@ -38,6 +38,7 @@ export default function Patrons() {
                 member={member}
                 num={`0${index + 1}`}
                 meta={member.nameIsPending ? 'Awaiting name' : member.body.toUpperCase()}
+                showPreview
               />
             </li>
           ))}
