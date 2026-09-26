@@ -14,6 +14,11 @@ assets-source
 .vscode/*
 !.vscode/extensions.json
 
+# Local AI/agent tooling - never uploaded to the repo
+.claude/
+.clinerules/
+.cline/
+
 # Prompt and PRD documentation files
 *PRD*.md
 *prompt*.md

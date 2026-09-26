@@ -46,30 +46,6 @@ To tweak a theme, edit `:root` and the `[data-theme='dark']` block at the top of
 
 ---
 
-## 1c. UI/UX Pro Max design skill
-
-[UI/UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) (MIT) is installed at
-`.claude/skills/ui-ux-pro-max/` — 50 active styles, 192 product palettes, 74 font pairings,
-119 UX guidelines and 22 stack profiles. It is the reference used for every UI/UX decision
-in this project, and `.clinerules/ui-ux-pro-max.md` applies its priority order
-(accessibility → touch → performance → style → layout → type → animation).
-
-The skill's own `scripts/search.py` needs Python. This repo includes a Node equivalent that
-reads the same CSV data, so it works anywhere:
-
-```bash
-node scripts/uipro-search.mjs "focus keyboard target" --domain ux
-node scripts/uipro-search.mjs "editorial minimal" --domain style
-node scripts/uipro-search.mjs "dark mode contrast" --domain color
-node scripts/uipro-search.mjs "lazy image bundle" --stack react
-```
-
-Matching style for this site: **`exaggerated-minimalism`** (oversized `clamp()` type, extreme
-whitespace, black/white + one accent, light & dark supported, "best for portfolios,
-editorial"). Brand rules from the club override the generic database where they differ.
-
----
-
 ## 2. Install & run
 
 ```bash
@@ -79,18 +55,14 @@ npm run build      # production build -> dist/
 npm run preview    # preview the production build on http://localhost:4173
 ```
 
-Optional quality checks:
+Optional content tasks:
 
 ```bash
-npm run assets          # regenerate logo / favicon / OG image / placeholder portraits
-npm run images          # optimise official portraits (after the photoshoot)
-npm run check:routes    # every QR destination returns the app (run with preview running)
-npm run check:gh        # simulator for GitHub Pages deep links (uses a real browser)
-npm run shots           # screenshots every key page at mobile + desktop widths
+npm run assets   # regenerate logo / favicons / OG image / placeholder portraits
+npm run images   # optimise official portraits (after the photoshoot)
 ```
 
-`check:gh` and `shots` need Chrome or Edge installed locally; they are development tools and
-are not required for deployment.
+Both are one-off maintenance commands and are not part of the build or deployment.
 
 ---
 
@@ -108,12 +80,9 @@ are not required for deployment.
 │       ├── branding/           # logo, favicons, apple-touch-icon, og-cover
 │       └── members/            # portraits (placeholders until the shoot)
 ├── scripts/
+│   ├── 404.template.html       # static-host deep-link fallback template (used by the build)
 │   ├── generate-assets.mjs     # branding + placeholder generation
-│   ├── optimize-images.mjs     # portrait optimisation for the official shoot
-│   ├── check-routes.mjs        # QR route smoke test (HTTP)
-│   ├── check-gh-pages.mjs      # GitHub Pages deep-link test (real browser)
-│   ├── screenshot.mjs          # visual smoke test
-│   └── 404.template.html       # static-host deep-link fallback template
+│   └── optimize-images.mjs     # portrait optimisation for the official shoot
 └── src/
     ├── components/             # Navigation, MobileMenu, PersonHero, Portrait, Arrow, …
     ├── data/
@@ -177,7 +146,7 @@ All people live in [`src/data/members.js`](src/data/members.js). The object key 
 * **Patrons** – `src/data/members.js` (`patrons/patron`, `patrons/co-patron`). Names stay
   `[Name to be added]` until the club supplies them.
 
-After editing, `npm run check:routes` (with `npm run preview` running) confirms every QR URL
+After editing, rebuild (`npm run build`) and open any QR URL with `npm run preview` to confirm it
 still resolves.
 
 ---
@@ -303,8 +272,7 @@ opens a stable URL.
 
 ```bash
 npm run build
-npm run preview      # terminal 1
-npm run check:routes # terminal 2 -> checks all 26 destinations
+npm run preview   # then open each destination, e.g. http://localhost:4173/vice-president
 ```
 
 Or open any URL directly in a browser and refresh — direct loads and hard refreshes must both
@@ -335,11 +303,10 @@ and so on for all 25 non-root routes. That means a scanned QR link returns **HTT
    `VITE_BASE=/UCP-PHOTOGRAPHY-CLUB/` from `.env.github`) and publishes `dist/`.
 4. Site: `https://tahasync.github.io/UCP-PHOTOGRAPHY-CLUB/`
 
-Local check of the GitHub Pages behaviour (base path + deep links + 404 fallback):
+Local check of the GitHub Pages build (base path + deep links):
 
 ```bash
-npm run build:gh
-npm run check:gh     # serves dist/ like Pages and opens real QR URLs in a browser
+npm run build:gh    # then serve dist/ with any static server and open a QR URL
 ```
 
 ### Custom domain / repository rename
@@ -391,7 +358,7 @@ rendered in production.
 | Blank page or 404s for assets on GitHub Pages | Base path mismatch — rebuild with `npm run build:gh`, or fix `VITE_BASE` |
 | Portrait not showing | File name/path must match `image` in `members.js`; missing files fall back to a neutral panel |
 | Old content after editing data | Rebuild (`npm run build`) — data is bundled at build time |
-| `npm run check:routes` fails | The preview server is not running, or a slug was renamed |
+| A QR URL 404s after a data edit | A slug was renamed. Restore it, or keep the old path as a redirect |
 
 ---
 

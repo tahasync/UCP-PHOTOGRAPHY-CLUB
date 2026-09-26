@@ -105,10 +105,6 @@ const main = async () => {
     await squareIcon(emblem, 32, 2)
   );
   await fs.writeFile(
-    path.join(BRAND_DIR, 'favicon-48.png'),
-    await squareIcon(emblem, 48, 3)
-  );
-  await fs.writeFile(
     path.join(BRAND_DIR, 'apple-touch-icon.png'),
     await squareIcon(emblem, 180, 18)
   );
