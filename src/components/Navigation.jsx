@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import MobileMenu from './MobileMenu.jsx';
+import ThemeToggle from './ThemeToggle.jsx';
 import { NAV_ITEMS, isNavItemActive } from '../data/navigation.js';
 
 /**
@@ -57,19 +58,23 @@ export default function Navigation() {
             })}
           </nav>
 
-          <button
-            type="button"
-            className={`menu-toggle${menuOpen ? ' is-open' : ''}`}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
-            onClick={() => setMenuOpen((value) => !value)}
-          >
-            <span>{menuOpen ? 'Close' : 'Menu'}</span>
-            <span className="menu-toggle__bars" aria-hidden="true">
-              <span />
-              <span />
-            </span>
-          </button>
+          <div className="site-header__actions">
+            <ThemeToggle />
+
+            <button
+              type="button"
+              className={`menu-toggle${menuOpen ? ' is-open' : ''}`}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+              onClick={() => setMenuOpen((value) => !value)}
+            >
+              <span>{menuOpen ? 'Close' : 'Menu'}</span>
+              <span className="menu-toggle__bars" aria-hidden="true">
+                <span />
+                <span />
+              </span>
+            </button>
+          </div>
         </div>
       </header>
 

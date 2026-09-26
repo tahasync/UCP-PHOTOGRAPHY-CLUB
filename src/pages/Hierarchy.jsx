@@ -12,7 +12,9 @@ export default function Hierarchy() {
     <div className="shell">
       <Seo
         title="Hierarchy — 2026–27"
-        description="The five teams of the UCP Photography Club hierarchy for 2026–27: Operations, Editing, Comms, Social Media and Creatives."
+        description={`The ${teamCount} teams of the UCP Photography Club hierarchy for 2026–27: ${departments
+          .map((department) => department.name)
+          .join(', ')}.`}
       />
 
       <header className="page-head">

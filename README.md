@@ -19,11 +19,30 @@ This site documents **only the current 2026–27 tenure**.
 | Routing | React Router 6 (BrowserRouter, `basename` aware) |
 | Motion | Framer Motion 11 (fast, ease-out, reduced-motion aware) |
 | Styling | Plain CSS with custom properties (`src/styles`) — no UI kit |
+| Theme | Light + dark, CSS-token based, toggle in the header, `prefers-color-scheme` aware |
 | Fonts | Inter Variable, self-hosted through `@fontsource-variable/inter` |
 | Build assets | `sharp` (logo, favicons, OG image, portrait compression) |
 | Hosting | Static — Netlify or GitHub Pages (both configured) |
 
 No backend, no database, no CMS.
+
+---
+
+## 1b. Light & dark theme
+
+The site ships with two themes that share one layout and one set of semantic CSS tokens
+(`--bg`, `--fg`, `--line`, `--surface`, `--muted`, `--inverse-*`).
+
+* The header has a **sun / moon switch** (44×44px, keyboard accessible, `aria-pressed`).
+* The choice is stored in `localStorage` under `upc-theme`; with no stored preference the
+  operating system setting wins.
+* `index.html` sets `data-theme` **before the first paint**, so there is no flash.
+* The browser `<meta name="theme-color">` follows the active theme.
+* Inverted sections (footer, manifesto band, mobile menu) keep their dark-panel identity in
+  both themes via the `--inverse-*` tokens.
+
+To tweak a theme, edit `:root` and the `[data-theme='dark']` block at the top of
+`src/styles/globals.css` — no component changes needed.
 
 ---
 
@@ -119,6 +138,18 @@ All people live in [`src/data/members.js`](src/data/members.js). The object key 
 * **Rename someone** – change `name` only. Never change `slug` after cards are printed.
 * **Reorder positions** – change `order`.
 * **Team intros & names** – `src/data/hierarchy.js` (`name`, `index`, `intro`, `introIsPlaceholder`).
+  Display names may change freely; the `slug`/`route` must not. Current display names:
+
+  | slug | Display name | Route |
+  | --- | --- | --- |
+  | `operations` | Operations | `/operations` |
+  | `editing` | Editing | `/editing` |
+  | `comms` | Communication And Publication | `/comms` |
+  | `social-media` | Social Media | `/social-media` |
+  | `creatives` | Graphics and Art And Craft | `/creatives` |
+
+  The slug, the member `departmentSlug` and the URL stay `comms` / `creatives` so already
+  printed QR codes keep working — only the visible team name changed.
 * **Patrons** – `src/data/members.js` (`patrons/patron`, `patrons/co-patron`). Names stay
   `[Name to be added]` until the club supplies them.
 
@@ -255,6 +286,11 @@ npm run check:routes # terminal 2 -> checks all 26 destinations
 Or open any URL directly in a browser and refresh — direct loads and hard refreshes must both
 work (they are handled by `netlify.toml` / `public/_redirects` on Netlify and by
 `dist/404.html` on GitHub Pages).
+
+Every QR destination is also **pre-rendered as a real folder** at build time: the Vite plugin
+in `vite.config.js` writes `dist/vice-president/index.html`, `dist/editing/director/index.html`,
+and so on for all 25 non-root routes. That means a scanned QR link returns **HTTP 200** with no
+404 request in the browser console — `dist/404.html` is then only a safety net for unknown URLs.
 
 ---
 

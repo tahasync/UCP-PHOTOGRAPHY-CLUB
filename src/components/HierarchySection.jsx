@@ -3,7 +3,7 @@ import Arrow from './Arrow.jsx';
 import { hierarchy } from '../data/hierarchy.js';
 
 /**
- * The hierarchy directory: 01 / OPERATIONS … 05 / CREATIVES.
+ * The hierarchy directory: 01 / OPERATIONS … 05 / GRAPHICS AND ART AND CRAFT.
  * Large typographic rows rather than cards.
  */
 export default function HierarchySection({ showMembers = true }) {

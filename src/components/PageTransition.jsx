@@ -9,9 +9,9 @@ export default function PageTransition({ children, className = '' }) {
     <motion.main
       id="main"
       className={className}
-      initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
+      initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
       animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-      exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+      exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -12 }}
       transition={{ duration: DURATION.base, ease: EASE }}
     >
       {children}

@@ -191,7 +191,7 @@ export const members = {
   },
 
   /* ---------------------------------------------------------------- *
-   * 03 / Comms
+   * 03 / Communication And Publication
    * ---------------------------------------------------------------- */
   [key('comms', 'director-publications')]: {
     slug: key('comms', 'director-publications'),
@@ -199,7 +199,7 @@ export const members = {
     name: 'Eshaal Faisal',
     position: 'Director Publications',
     positionLines: ['Director', 'Publications'],
-    body: 'Comms',
+    body: 'Communication And Publication',
     group: 'hierarchy',
     departmentSlug: 'comms',
     order: 1,
@@ -217,7 +217,7 @@ export const members = {
     name: 'Manahil Shafique',
     position: 'Deputy Director Publications',
     positionLines: ['Deputy Director', 'Publications'],
-    body: 'Comms',
+    body: 'Communication And Publication',
     group: 'hierarchy',
     departmentSlug: 'comms',
     order: 2,
@@ -235,7 +235,7 @@ export const members = {
     name: 'Anamta Jahangir',
     position: 'Director Communications',
     positionLines: ['Director', 'Communications'],
-    body: 'Comms',
+    body: 'Communication And Publication',
     group: 'hierarchy',
     departmentSlug: 'comms',
     order: 3,
@@ -287,7 +287,7 @@ export const members = {
   },
 
   /* ---------------------------------------------------------------- *
-   * 05 / Creatives
+   * 05 / Graphics and Art And Craft
    * ---------------------------------------------------------------- */
   [key('creatives', 'director-graphics')]: {
     slug: key('creatives', 'director-graphics'),
@@ -295,7 +295,7 @@ export const members = {
     name: 'Hadia Ammar',
     position: 'Director Graphics',
     positionLines: ['Director', 'Graphics'],
-    body: 'Creatives',
+    body: 'Graphics and Art And Craft',
     group: 'hierarchy',
     departmentSlug: 'creatives',
     order: 1,
@@ -313,7 +313,7 @@ export const members = {
     name: 'Farmeen Aejaz Chughtaie',
     position: 'Director Art & Craft',
     positionLines: ['Director', 'Art & Craft'],
-    body: 'Creatives',
+    body: 'Graphics and Art And Craft',
     group: 'hierarchy',
     departmentSlug: 'creatives',
     order: 2,

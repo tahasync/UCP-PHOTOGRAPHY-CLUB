@@ -17,17 +17,30 @@
   --gray-500: #666666;
 
   /* Structure */
-  --hairline: 1px solid var(--gray-200);
-  --hairline-black: 1px solid var(--black);
+  --hairline: 1px solid var(--line);
+  --hairline-black: 1px solid var(--fg);
   --header-h: 60px;
   --gutter: clamp(1.25rem, 5vw, 5rem);
   --maxw: 1680px;
 
+  /* Semantic theme tokens — LIGHT (default) */
+  --bg: #ffffff;
+  --fg: #000000;
+  --line: #e5e5e5;
+  --surface: #f5f5f5;
+  --muted: #666666;
+
+  /* Inverted panels (manifesto band, footer, mobile menu) */
+  --inverse-bg: #000000;
+  --inverse-fg: #ffffff;
+  --inverse-line: rgba(255, 255, 255, 0.16);
+  --inverse-muted: rgba(255, 255, 255, 0.62);
+
   /* Motion */
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur-fast: 200ms;
-  --dur: 320ms;
-  --dur-slow: 520ms;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 240ms;
+  --dur: 420ms;
+  --dur-slow: 650ms;
 
   /* Type */
   --font: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
@@ -40,6 +53,27 @@
   :root {
     --header-h: 72px;
   }
+}
+
+/* --------------------------------------------------------------------------
+   DARK THEME
+   Toggled by <html data-theme="dark"> (see src/lib/theme.js).
+   -------------------------------------------------------------------------- */
+
+[data-theme='dark'] {
+  --bg: #0b0b0c;
+  --fg: #f4f4f5;
+  --line: #27272a;
+  --surface: #151517;
+  --muted: #a1a1aa;
+
+  /* Brighter red keeps AA contrast on dark backgrounds */
+  --red-ink: #ff4d4d;
+
+  --inverse-bg: #111113;
+  --inverse-fg: #f4f4f5;
+  --inverse-line: rgba(255, 255, 255, 0.16);
+  --inverse-muted: rgba(255, 255, 255, 0.62);
 }
 
 /* --------------------------------------------------------------------------
@@ -63,8 +97,8 @@ body {
 }
 
 body {
-  background: var(--white);
-  color: var(--black);
+  background: var(--bg);
+  color: var(--fg);
   font-family: var(--font);
   font-size: 1rem;
   line-height: 1.5;
@@ -134,8 +168,8 @@ a {
   left: 0;
   transform: translateY(-120%);
   z-index: 200;
-  background: var(--black);
-  color: var(--white);
+  background: var(--inverse-bg);
+  color: var(--inverse-fg);
   padding: 0.7rem 1rem;
   font-size: var(--fs-micro);
   font-weight: 600;
@@ -186,11 +220,11 @@ a {
 .rule {
   height: 1px;
   border: 0;
-  background: var(--gray-200);
+  background: var(--line);
 }
 
 .rule--black {
-  background: var(--black);
+  background: var(--fg);
 }
 
 .rule--red {
@@ -221,7 +255,7 @@ a {
 }
 
 .eyebrow--muted {
-  color: var(--gray-500);
+  color: var(--muted);
 }
 
 .eyebrow--red {
@@ -247,7 +281,7 @@ a {
 
 @media (min-width: 1024px) {
   .display--cover {
-    font-size: clamp(4.25rem, 8vw, 8rem);
+    font-size: clamp(3.5rem, 7vw, 7.5rem);
   }
 }
 
@@ -277,7 +311,7 @@ a {
 .lede {
   font-size: clamp(1rem, 1.1vw, 1.125rem);
   line-height: 1.55;
-  color: var(--gray-500);
+  color: var(--muted);
   max-width: 54ch;
 }
 
@@ -291,7 +325,7 @@ a {
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gray-500);
+  color: var(--muted);
 }
 
 .tnum {
@@ -316,7 +350,7 @@ a {
 
 
 .pending {
-  color: var(--gray-500);
+  color: var(--muted);
 }
 
 /* Animated underline used on every textual link */
@@ -354,19 +388,19 @@ a:focus-visible .u-line::after {
   right: 0;
   z-index: 70;
   height: var(--header-h);
-  background: var(--white);
+  background: var(--bg);
   border-bottom: 1px solid transparent;
   transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease),
     color var(--dur) var(--ease);
 }
 
 .site-header.is-scrolled {
-  border-bottom-color: var(--gray-200);
+  border-bottom-color: var(--line);
 }
 
 .site-header.is-open {
-  background: var(--black);
-  color: var(--white);
+  background: var(--inverse-bg);
+  color: var(--inverse-fg);
   border-bottom-color: transparent;
 }
 
@@ -449,6 +483,45 @@ a:focus-visible .u-line::after {
   transform: scaleX(1);
 }
 
+/* Theme toggle (light / dark) */
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: inherit;
+  transition: color var(--dur) var(--ease);
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  color: var(--red-ink);
+}
+
+.theme-toggle svg {
+  width: 17px;
+  height: 17px;
+}
+
+.theme-toggle__sun {
+  display: none;
+}
+
+[data-theme='dark'] .theme-toggle__sun {
+  display: block;
+}
+
+[data-theme='dark'] .theme-toggle__moon {
+  display: none;
+}
+
 /* Mobile menu toggle */
 .menu-toggle {
   display: inline-flex;
@@ -514,8 +587,8 @@ a:focus-visible .u-line::after {
   gap: 2rem;
   padding: calc(var(--header-h) + clamp(1.5rem, 7vw, 3rem)) var(--gutter)
     clamp(1.5rem, 5vw, 2.5rem);
-  background: var(--black);
-  color: var(--white);
+  background: var(--inverse-bg);
+  color: var(--inverse-fg);
   overflow-y: auto;
 }
 
@@ -549,9 +622,9 @@ a:focus-visible .u-line::after {
   flex-wrap: wrap;
   gap: 0.5rem 1.5rem;
   justify-content: space-between;
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  border-top: 1px solid var(--inverse-line);
   padding-top: 1.25rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--inverse-muted);
   font-size: var(--fs-micro);
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -562,8 +635,8 @@ a:focus-visible .u-line::after {
    -------------------------------------------------------------------------- */
 
 .site-footer {
-  background: var(--black);
-  color: var(--white);
+  background: var(--inverse-bg);
+  color: var(--inverse-fg);
   border-top: 2px solid var(--red);
   padding-block: clamp(2.5rem, 6vw, 4.5rem);
 }
@@ -611,8 +684,8 @@ a:focus-visible .u-line::after {
   justify-content: space-between;
   margin-top: clamp(2rem, 4vw, 3.5rem);
   padding-top: 1.25rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
-  color: rgba(255, 255, 255, 0.62);
+  border-top: 1px solid var(--inverse-line);
+  color: var(--inverse-muted);
   font-size: var(--fs-small);
 }
 
@@ -650,7 +723,8 @@ a:focus-visible .u-line::after {
 
 @media (min-width: 1024px) {
   .cover__main {
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr);
+    /* Wide title column so the longest word never reaches the aside/logo. */
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.5fr);
     align-items: end;
   }
 }
@@ -677,8 +751,14 @@ a:focus-visible .u-line::after {
 }
 
 .cover__logo {
-  width: clamp(170px, 26vw, 300px);
+  width: clamp(150px, 16vw, 230px);
   height: auto;
+}
+
+/* The supplied logo has a white background — keep it readable on dark pages. */
+[data-theme='dark'] .cover__logo {
+  background: var(--white);
+  padding: 10px 12px;
 }
 
 .cover__statement {
@@ -710,7 +790,7 @@ a:focus-visible .u-line::after {
   display: block;
   width: clamp(40px, 11vw, 110px);
   height: 2px;
-  background: var(--gray-200);
+  background: var(--line);
   overflow: hidden;
 }
 
@@ -767,7 +847,7 @@ a:focus-visible .u-line::after {
   display: block;
   margin-top: 0.6rem;
   font-size: var(--fs-small);
-  color: var(--gray-500);
+  color: var(--muted);
 }
 
 .index-row__meta {
@@ -775,7 +855,7 @@ a:focus-visible .u-line::after {
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gray-500);
+  color: var(--muted);
   text-align: right;
   white-space: nowrap;
 }
@@ -795,34 +875,35 @@ a.index-row:focus-visible .index-row__arrow {
   transform: translateX(6px);
 }
 
-/* Leadership rows keep the portrait hidden until hover (desktop only). */
+/* Leadership rows reveal the portrait on hover (desktop, pointer devices only).
+   The preview lives in its own reserved grid column so it can never overlap
+   the name, the meta line or the arrow. */
 .person-row__preview {
   display: none;
 }
 
 @media (min-width: 1024px) and (hover: hover) {
+  .person-row {
+    --preview-w: clamp(112px, 10vw, 168px);
+    grid-template-columns: auto minmax(0, 1fr) auto var(--preview-w);
+    column-gap: clamp(1rem, 2.6vw, 2.25rem);
+  }
+
   .person-row__preview {
     display: block;
-    position: absolute;
-    right: clamp(2rem, 4vw, 4rem);
-    top: 50%;
-    width: clamp(120px, 10vw, 180px);
-    transform: translateY(-50%) scale(0.97);
+    width: 100%;
+    justify-self: end;
+    align-self: center;
     opacity: 0;
+    transform: translateY(10px) scale(0.985);
     pointer-events: none;
     transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
-    z-index: 2;
   }
 
   .person-row:hover .person-row__preview,
   .person-row:focus-within .person-row__preview {
     opacity: 1;
-    transform: translateY(-50%) scale(1);
-  }
-
-  /* Long names stay clear of the preview. */
-  .person-row .index-row__title {
-    max-width: 62%;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -834,7 +915,7 @@ a.index-row:focus-visible .index-row__arrow {
   position: relative;
   width: 100%;
   overflow: hidden;
-  background: var(--gray-100);
+  background: var(--surface);
 }
 
 .portrait--4x5 {
@@ -859,7 +940,7 @@ a.index-row:focus-visible .index-row__arrow {
 .portrait__veil {
   position: absolute;
   inset: 0;
-  background: var(--white);
+  background: var(--bg);
   transform-origin: bottom center;
 }
 
@@ -872,7 +953,7 @@ a.index-row:focus-visible .index-row__arrow {
   font-size: var(--fs-micro);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gray-500);
+  color: var(--muted);
 }
 
 /* Neutral fallback when an image file is missing. */
@@ -882,8 +963,8 @@ a.index-row:focus-visible .index-row__arrow {
   display: grid;
   place-items: center;
   gap: 0.5rem;
-  background: var(--gray-100);
-  color: var(--gray-500);
+  background: var(--surface);
+  color: var(--muted);
   text-align: center;
   padding: 1rem;
 }
@@ -958,11 +1039,11 @@ a.index-row:focus-visible .index-row__arrow {
   font-size: var(--fs-micro);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gray-500);
+  color: var(--muted);
 }
 
 .crumb__current {
-  color: var(--black);
+  color: var(--fg);
 }
 
 .person {
@@ -1093,7 +1174,7 @@ a.index-row:focus-visible .index-row__arrow {
 .links__note {
   padding-block: 1rem;
   border-bottom: var(--hairline);
-  color: var(--gray-500);
+  color: var(--muted);
   font-size: var(--fs-small);
   line-height: 1.6;
 }
@@ -1164,7 +1245,7 @@ a.cta-row:focus-visible .cta-row__arrow {
 }
 
 .also__position {
-  color: var(--gray-500);
+  color: var(--muted);
   font-weight: 500;
 }
 
@@ -1242,7 +1323,7 @@ a.cta-row:focus-visible .cta-row__arrow {
 }
 
 .structure__sep {
-  color: var(--gray-500);
+  color: var(--muted);
   font-size: var(--fs-small);
 }
 
@@ -1254,7 +1335,7 @@ a.cta-row:focus-visible .cta-row__arrow {
 
 @media (min-width: 768px) {
   .structure__teams {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   }
 }
 
@@ -1284,8 +1365,8 @@ a.cta-row:focus-visible .cta-row__arrow {
    -------------------------------------------------------------------------- */
 
 .manifesto {
-  background: var(--black);
-  color: var(--white);
+  background: var(--inverse-bg);
+  color: var(--inverse-fg);
   padding-block: clamp(2.75rem, 7vw, 6rem);
 }
 
@@ -1306,7 +1387,7 @@ a.cta-row:focus-visible .cta-row__arrow {
 .manifesto__note {
   margin-top: clamp(1.25rem, 3vw, 2rem);
   max-width: 54ch;
-  color: rgba(255, 255, 255, 0.66);
+  color: var(--inverse-muted);
   font-size: var(--fs-small);
   line-height: 1.65;
 }
@@ -1317,7 +1398,7 @@ a.cta-row:focus-visible .cta-row__arrow {
   gap: 1.75rem 1.5rem;
   margin-top: clamp(2rem, 5vw, 3.5rem);
   padding-top: clamp(1.5rem, 3vw, 2.25rem);
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  border-top: 1px solid var(--inverse-line);
 }
 
 @media (min-width: 768px) {
@@ -1340,7 +1421,7 @@ a.cta-row:focus-visible .cta-row__arrow {
   font-size: var(--fs-micro);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.62);
+  color: var(--inverse-muted);
 }
 
 /* --------------------------------------------------------------------------
@@ -1392,7 +1473,7 @@ a.cta-row:focus-visible .cta-row__arrow {
 
 .brand-loading__rule {
   height: 2px;
-  background: var(--black);
+  background: var(--fg);
   transform-origin: left center;
   animation: brand-loading 900ms var(--ease) forwards;
 }

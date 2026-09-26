@@ -7,6 +7,7 @@ import './styles/globals.css';
 import './styles/animations.css';
 
 import App from './App.jsx';
+import { initTheme } from './lib/theme.js';
 
 /*
  * GitHub Pages answers unknown paths with 404.html, which forwards the deep
@@ -19,6 +20,9 @@ if (spaPath) {
   const restored = spaPath.startsWith('/') ? spaPath : `/${spaPath}`;
   window.history.replaceState(null, '', `${base}${restored}`);
 }
+
+/* Apply the stored / system theme before the first paint. */
+initTheme();
 
 /* React Router basename keeps links working under a project-site subpath. */
 const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';

@@ -9,7 +9,7 @@ import SectionHeading from '../components/SectionHeading.jsx';
 import { CLUB } from '../data/site.js';
 import { EASE } from '../lib/motion.js';
 import { presentBodyMembers, hierarchyMembers, patronMembers } from '../data/members.js';
-import { teamCount } from '../data/hierarchy.js';
+import { teamCount, departments } from '../data/hierarchy.js';
 
 const pad = (value) => String(value).padStart(2, '0');
 
@@ -115,7 +115,7 @@ export default function Home() {
                 to="/hierarchy"
                 num="03"
                 title="Hierarchy"
-                sub="Operations · Editing · Comms · Social Media · Creatives"
+                sub={departments.map((department) => department.name).join(' · ')}
                 meta={`${pad(teamCount)} teams`}
               />
             </li>

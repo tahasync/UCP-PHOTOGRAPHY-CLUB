@@ -54,7 +54,7 @@ export default function Portrait({
           aria-hidden="true"
           initial={{ scaleY: 1 }}
           animate={{ scaleY: 0 }}
-          transition={{ duration: 0.7, ease: EASE, delay: 0.04 }}
+          transition={{ duration: 0.85, ease: EASE, delay: 0.08 }}
         />
       ) : null}
     </figure>

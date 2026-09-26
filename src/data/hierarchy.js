@@ -32,11 +32,11 @@ export const departments = [
   {
     slug: 'comms',
     index: '03',
-    name: 'Comms',
+    name: 'Communication And Publication',
     route: '/comms',
-    // TODO: Replace with the approved Communications team introduction.
+    // TODO: Replace with the approved Communication And Publication introduction.
     intro:
-      'The Comms team handles the club’s written voice — publications, announcements and the communication that connects UPC with its members.',
+      'The Communication And Publication team handles the club’s written voice — publications, announcements and the communication that connects UPC with its members.',
     introIsPlaceholder: true
   },
   {
@@ -52,11 +52,11 @@ export const departments = [
   {
     slug: 'creatives',
     index: '05',
-    name: 'Creatives',
+    name: 'Graphics and Art And Craft',
     route: '/creatives',
-    // TODO: Replace with the approved Creatives team introduction.
+    // TODO: Replace with the approved Graphics and Art And Craft introduction.
     intro:
-      'The Creatives team shapes the club’s visual and material design — graphics, art and craft for campaigns, events and the tenure’s identity.',
+      'The Graphics and Art And Craft team shapes the club’s visual and material design — graphics, art and craft for campaigns, events and the tenure’s identity.',
     introIsPlaceholder: true
   }
 ];
