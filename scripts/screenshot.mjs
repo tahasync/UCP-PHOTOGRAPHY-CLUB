@@ -27,6 +27,8 @@ const SHOTS = [
   { name: 'home-desktop-dark', route: '/', width: 1440, height: 1000, theme: 'dark' },
   { name: 'home-mobile', route: '/', width: 390, height: 844 },
   { name: 'home-mobile-dark', route: '/', width: 390, height: 844, theme: 'dark' },
+  { name: 'home-mobile-320', route: '/', width: 320, height: 720 },
+  { name: 'home-wide-1920', route: '/', width: 1920, height: 1080 },
   { name: 'present-body-desktop', route: '/present-body', width: 1440, height: 1000 },
   {
     name: 'present-body-desktop-dark',
@@ -43,6 +45,8 @@ const SHOTS = [
     height: 1200,
     theme: 'dark'
   },
+  { name: 'hierarchy-tablet-768', route: '/hierarchy', width: 768, height: 1024 },
+  { name: 'hierarchy-mobile-360', route: '/hierarchy', width: 360, height: 780 },
   { name: 'department-desktop', route: '/comms', width: 1440, height: 1000 },
   {
     name: 'department-desktop-dark',
@@ -51,6 +55,7 @@ const SHOTS = [
     height: 1000,
     theme: 'dark'
   },
+  { name: 'department-tablet-820', route: '/operations', width: 820, height: 1180 },
   { name: 'person-desktop', route: '/vice-president', width: 1440, height: 1000 },
   {
     name: 'person-desktop-dark',
@@ -67,6 +72,7 @@ const SHOTS = [
     height: 812,
     theme: 'dark'
   },
+  { name: 'person-tablet-820', route: '/patrons/patron', width: 820, height: 1180 },
   { name: 'menu-open-mobile', route: '/', width: 390, height: 844, click: '.menu-toggle' },
   {
     name: 'menu-open-mobile-dark',

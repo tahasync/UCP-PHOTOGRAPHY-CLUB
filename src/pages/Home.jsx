@@ -4,7 +4,6 @@ import Seo from '../components/Seo.jsx';
 import Logo from '../components/Logo.jsx';
 import Arrow from '../components/Arrow.jsx';
 import Reveal from '../components/Reveal.jsx';
-import IndexRow from '../components/IndexRow.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
 import { CLUB } from '../data/site.js';
 import { EASE } from '../lib/motion.js';
@@ -91,35 +90,45 @@ export default function Home() {
             meta={`${appointedPositions} appointed positions`}
           />
 
-          <ul className="index-list">
-            <li>
-              <IndexRow
-                to="/present-body"
-                num="01"
-                title="Present Body"
-                sub="President & Vice President"
-                meta={`${pad(presentBodyMembers.length)} positions`}
-              />
-            </li>
-            <li>
-              <IndexRow
-                to="/patrons"
-                num="02"
-                title="Patrons Body"
-                sub="Patron & Co-Patron"
-                meta={`${pad(patronMembers.length)} positions`}
-              />
-            </li>
-            <li>
-              <IndexRow
-                to="/hierarchy"
-                num="03"
-                title="Hierarchy"
-                sub={departments.map((department) => department.name).join(' · ')}
-                meta={`${pad(teamCount)} teams`}
-              />
-            </li>
-          </ul>
+          <div className="bento">
+            <Link className="tile" to="/present-body">
+              <span className="tile__num">01</span>
+              <span>
+                <span className="tile__title">Present Body</span>
+                <span className="tile__sub">President &amp; Vice President</span>
+              </span>
+              <span className="tile__meta">
+                {pad(presentBodyMembers.length)} positions
+                <Arrow />
+              </span>
+            </Link>
+
+            <Link className="tile tile--accent" to="/patrons">
+              <span className="tile__num">02</span>
+              <span>
+                <span className="tile__title">Patrons Body</span>
+                <span className="tile__sub">Patron &amp; Co-Patron</span>
+              </span>
+              <span className="tile__meta">
+                {pad(patronMembers.length)} positions
+                <Arrow />
+              </span>
+            </Link>
+
+            <Link className="tile" to="/hierarchy">
+              <span className="tile__num">03</span>
+              <span>
+                <span className="tile__title">Hierarchy</span>
+                <span className="tile__sub">
+                  {departments.map((department) => department.name).join(' · ')}
+                </span>
+              </span>
+              <span className="tile__meta">
+                {pad(teamCount)} teams
+                <Arrow />
+              </span>
+            </Link>
+          </div>
         </div>
       </section>
 
