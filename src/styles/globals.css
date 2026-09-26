@@ -275,8 +275,12 @@ a {
 }
 
 .display--cover {
-  /* Sized so the longest word (PHOTOGRAPHY) always fits inside its column. */
+  /* Sized so the longest word (PHOTOGRAPHY) always fits inside its column.
+     The three cover words need a little more leading than the default
+     editorial 0.88 so the stack never reads as cramped. */
   font-size: clamp(2.4rem, 11vw, 4.25rem);
+  line-height: 0.96;
+  letter-spacing: -0.03em;
 }
 
 @media (min-width: 1024px) {
@@ -732,15 +736,17 @@ a:focus-visible .u-line::after {
 .cover__title {
   display: flex;
   flex-direction: column;
+  /* Even optical gap between the three stacked words. */
+  row-gap: 0.06em;
 }
 
 .cover__title > span {
   display: block;
 }
 
-/* Slight editorial indent on the middle word. */
+/* Small, consistent editorial indent on the middle word. */
 .cover__title > span:nth-child(2) {
-  padding-left: clamp(0.5rem, 3vw, 4.5rem);
+  padding-left: clamp(0.4rem, 1.8vw, 2rem);
 }
 
 .cover__aside {
@@ -753,12 +759,17 @@ a:focus-visible .u-line::after {
 .cover__logo {
   width: clamp(150px, 16vw, 230px);
   height: auto;
+  /* The supplied logo has a transparent background plus a white splash, so on
+     dark pages it needs a clean, even plate. content-box keeps the artwork
+     at its intended size while the padding builds the plate around it. */
+  box-sizing: content-box;
+  background: var(--logo-plate, transparent);
+  padding: var(--logo-pad, 0);
 }
 
-/* The supplied logo has a white background — keep it readable on dark pages. */
-[data-theme='dark'] .cover__logo {
-  background: var(--white);
-  padding: 10px 12px;
+[data-theme='dark'] {
+  --logo-plate: #ffffff;
+  --logo-pad: 14px;
 }
 
 .cover__statement {
@@ -1096,8 +1107,8 @@ a.index-row:focus-visible .index-row__arrow {
 .person__name {
   font-size: clamp(2.75rem, 9vw, 6.5rem);
   font-weight: 700;
-  line-height: 0.88;
-  letter-spacing: -0.04em;
+  line-height: 0.94;
+  letter-spacing: -0.035em;
   text-transform: uppercase;
 }
 
