@@ -842,6 +842,24 @@ a:focus-visible .u-line::after {
 
 .index-row__body {
   min-width: 0;
+  grid-column: 2;
+}
+
+/*
+ * Explicit column mapping. Rows without a number (department + person lists)
+ * would otherwise shift every child one track to the left, collapsing the
+ * meta column and letting the hover portrait grow to fill the row.
+ */
+.index-row__num {
+  grid-column: 1;
+}
+
+.index-row__meta {
+  grid-column: 3;
+}
+
+.person-row__preview {
+  grid-column: 4;
 }
 
 .index-row__title {
@@ -886,15 +904,15 @@ a.index-row:focus-visible .index-row__arrow {
   transform: translateX(6px);
 }
 
-/* Leadership rows reveal the portrait on hover (desktop, pointer devices only).
-   The preview lives in its own reserved grid column so it can never overlap
-   the name, the meta line or the arrow. */
+/* Leadership rows (Present Body) reveal the portrait on hover. The preview
+   lives in its own reserved grid column so it can never overlap the name, the
+   meta line or the arrow, and it is only rendered where it is wanted. */
 .person-row__preview {
   display: none;
 }
 
 @media (min-width: 1024px) and (hover: hover) {
-  .person-row {
+  .person-row--preview {
     --preview-w: clamp(112px, 10vw, 168px);
     grid-template-columns: auto minmax(0, 1fr) auto var(--preview-w);
     column-gap: clamp(1rem, 2.6vw, 2.25rem);
@@ -938,6 +956,20 @@ a.index-row:focus-visible .index-row__arrow {
 }
 
 .portrait--1x1 {
+  aspect-ratio: 1 / 1;
+}
+
+/* Mirror the ratio onto the <img> itself: Lighthouse (and browsers) can then
+   reserve the correct box for lazy-loaded portraits and no CLS is possible. */
+.portrait--4x5 img {
+  aspect-ratio: 4 / 5;
+}
+
+.portrait--3x4 img {
+  aspect-ratio: 3 / 4;
+}
+
+.portrait--1x1 img {
   aspect-ratio: 1 / 1;
 }
 

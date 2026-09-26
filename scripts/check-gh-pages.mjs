@@ -91,7 +91,11 @@ const CASES = [
   { path: '/patrons', expect: 'Patrons' },
   { path: '/hierarchy', expect: 'Operations' },
   { path: '/operations', expect: 'Abdul Rahman' },
-  { path: '/vice-president', expect: 'Taha Naeem', title: 'Taha Naeem — Vice President' },
+  {
+    path: '/vice-president',
+    expect: 'Taha Naeem',
+    title: 'Taha Naeem, Vice President'
+  },
   { path: '/editing/director', expect: 'Mateen Kashif' },
   { path: '/creatives/director-art-craft', expect: 'Farmeen Aejaz Chughtaie' },
   { path: '/patrons/co-patron', expect: '[Name to be added]' },

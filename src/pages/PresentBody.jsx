@@ -40,6 +40,7 @@ export default function PresentBody() {
                 member={member}
                 num={`0${index + 1}`}
                 meta={member.body.toUpperCase()}
+                showPreview
               />
             </li>
           ))}
