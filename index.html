@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#000000" />
+
+    <title>UCP Photography Club — 2026–27</title>
+    <meta
+      name="description"
+      content="UCP Photography Club Executive Body and Leadership — 2026–27"
+    />
+    <meta name="author" content="UCP Photography Club" />
+
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%images/branding/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%BASE_URL%images/branding/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="%BASE_URL%images/branding/favicon-16.png" />
+    <link rel="apple-touch-icon" href="%BASE_URL%images/branding/apple-touch-icon.png" />
+    <link rel="manifest" href="%BASE_URL%site.webmanifest" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="UCP Photography Club" />
+    <meta property="og:title" content="UCP Photography Club — 2026–27" />
+    <meta
+      property="og:description"
+      content="UCP Photography Club Executive Body and Leadership — 2026–27"
+    />
+    <meta property="og:image" content="%BASE_URL%images/branding/og-cover.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <style>
+      /* Boot state: brand-first, no spinner, replaced the moment React mounts. */
+      html {
+        background: #ffffff;
+      }
+      #boot {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1.5rem;
+        background: #ffffff;
+        color: #000000;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      }
+      #boot .boot__mark {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+      #boot .boot__tenure {
+        font-size: 0.75rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #666666;
+      }
+      #boot .boot__rule {
+        height: 2px;
+        background: #000000;
+        transform-origin: left center;
+        animation: boot-rule 900ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+      @keyframes boot-rule {
+        from {
+          transform: scaleX(0);
+        }
+        to {
+          transform: scaleX(1);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #boot .boot__rule {
+          animation: none;
+          transform: scaleX(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div id="boot" aria-hidden="true">
+        <span class="boot__mark">UCP Photography Club</span>
+        <span class="boot__rule"></span>
+        <span class="boot__tenure">2026 — 27</span>
+      </div>
+    </div>
+    <noscript>
+      <p style="padding: 1.5rem; font-family: system-ui, sans-serif">
+        UCP Photography Club — 2026–27. This site needs JavaScript enabled.
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

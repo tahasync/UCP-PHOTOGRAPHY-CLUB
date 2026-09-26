@@ -1,0 +1,48 @@
+/* ==========================================================================
+   Motion system — keyframes used by CSS-driven animation.
+   Framer Motion drives page/route animation; these cover ambient motion.
+   ========================================================================== */
+
+@keyframes cover-scroll {
+  0% {
+    transform: translateX(-100%);
+  }
+  55% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes brand-loading {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Framer Motion base states. JS also respects the media query, but keeping the
+   CSS fallback means reduced-motion users never see a stuck animated element. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .portrait__veil {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UCP Photography Club — 2026–27</title>
+    <meta name="robots" content="noindex" />
+    <script>
+      /*
+       * Static-host deep-link fallback.
+       * GitHub Pages answers unknown paths with this file, so we hand the
+       * requested QR URL (/vice-president, /editing/director, ...) back to
+       * index.html, which restores it before React Router boots.
+       */
+      (function () {
+        var BASE = '__BASE__';
+        var location_ = window.location;
+        var path = location_.pathname;
+        if (BASE !== '/' && path.indexOf(BASE) === 0) {
+          path = path.slice(BASE.length - 1);
+        }
+        var restored =
+          path + location_.search + location_.hash;
+        location_.replace(
+          BASE + 'index.html?__spa_path=' + encodeURIComponent(restored)
+        );
+      })();
+    </script>
+    <noscript><meta http-equiv="refresh" content="0; url=__BASE__" /></noscript>
+    <style>
+      body {
+        margin: 0;
+        padding: 2rem;
+        font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+        background: #ffffff;
+        color: #000000;
+      }
+      a {
+        color: #cc0000;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      UCP Photography Club — 2026–27 ·
+      <a href="__BASE__">Return to UPC</a>
+    </p>
+  </body>
+</html>

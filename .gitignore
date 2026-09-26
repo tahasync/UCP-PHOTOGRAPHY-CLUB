@@ -1,0 +1,21 @@
+node_modules
+dist
+dist-ssr
+.screens
+*.local
+*.log
+.preview.pid
+assets-source
+.DS_Store
+.env.local
+.env.*.local
+.vite
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# Prompt and PRD documentation files
+*PRD*.md
+*prompt*.md
+*PROMPT*.md
+
