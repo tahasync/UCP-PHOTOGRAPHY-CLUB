@@ -47,7 +47,7 @@ export default function PersonRow({ member, num, meta, showPreview = false }) {
 
       {withPreview ? (
         <span className="person-row__preview" aria-hidden="true">
-          <Portrait member={member} ratio="4x5" sizes="168px" />
+          <Portrait member={member} ratio="4x5" sizes="150px" eager />
         </span>
       ) : null}
     </Link>

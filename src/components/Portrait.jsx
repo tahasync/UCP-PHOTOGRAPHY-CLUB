@@ -13,11 +13,16 @@ export default function Portrait({
   member,
   ratio = '4x5',
   priority = false,
+  // Decorative duplicates (the hover preview) load eagerly: they are tiny, sit
+  // near the viewport, and eager loading keeps them out of the
+  // "lazy images need explicit dimensions" audit entirely.
+  eager = false,
   sizes = '(min-width: 1024px) 50vw, 100vw',
   className = ''
 }) {
   const [failed, setFailed] = useState(false);
   const reduceMotion = useReducedMotion();
+  const isEager = priority || eager;
 
   const alt = member.imagePlaceholder
     ? `Placeholder portrait for ${member.name}, ${member.position}.`
@@ -40,7 +45,7 @@ export default function Portrait({
             width={1200}
             height={1500}
             sizes={sizes}
-            loading={priority ? 'eager' : 'lazy'}
+            loading={isEager ? 'eager' : 'lazy'}
             fetchpriority={priority ? 'high' : undefined}
             decoding="async"
             onError={() => setFailed(true)}

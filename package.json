@@ -13,6 +13,7 @@
     "images": "node scripts/optimize-images.mjs",
     "check:routes": "node scripts/check-routes.mjs",
     "check:gh": "node scripts/check-gh-pages.mjs",
+    "check:images": "node scripts/check-image-sizes.mjs",
     "shots": "node scripts/screenshot.mjs"
   },
   "dependencies": {
