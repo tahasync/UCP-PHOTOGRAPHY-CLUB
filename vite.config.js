@@ -83,7 +83,7 @@ function buildFinishingPlugin(base) {
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), 'VITE_');
-  // Local + Netlify deploy at the root, GitHub Pages project sites at /<repo>/.
+  // GitHub Pages project site at /<repo>/; local dev and the default build use the root.
   const base = env.VITE_BASE || '/';
 
   return {

@@ -22,7 +22,7 @@ This site documents **only the current 2026–27 tenure**.
 | Theme | Light + dark, CSS-token based, toggle in the header, `prefers-color-scheme` aware |
 | Fonts | Inter Variable, self-hosted through `@fontsource-variable/inter` |
 | Build assets | `sharp` (logo, favicons, OG image, portrait compression) |
-| Hosting | Static — Netlify or GitHub Pages (both configured) |
+| Hosting | GitHub Pages (auto-deployed on every push to `main`) |
 
 No backend, no database, no CMS.
 
@@ -71,9 +71,7 @@ Both are one-off maintenance commands and are not part of the build or deploymen
 ```text
 ├── index.html                  # shell, boot state, base-aware asset links
 ├── vite.config.js              # base path handling + 404.html deep-link emitter
-├── netlify.toml                # Netlify build, SPA redirects, cache headers
 ├── public/
-│   ├── _redirects              # Netlify SPA fallback (/*  ->  /index.html  200)
 │   ├── robots.txt
 │   ├── site.webmanifest
 │   └── images/
@@ -275,9 +273,8 @@ npm run build
 npm run preview   # then open each destination, e.g. http://localhost:4173/vice-president
 ```
 
-Or open any URL directly in a browser and refresh — direct loads and hard refreshes must both
-work (they are handled by `netlify.toml` / `public/_redirects` on Netlify and by
-`dist/404.html` on GitHub Pages).
+Or open any URL directly in a browser and refresh — direct loads and hard refreshes both work on
+GitHub Pages because every route is pre-rendered (see below) with `dist/404.html` as a fallback.
 
 Every QR destination is also **pre-rendered as a real folder** at build time: the Vite plugin
 in `vite.config.js` writes `dist/vice-president/index.html`, `dist/editing/director/index.html`,
@@ -286,22 +283,18 @@ and so on for all 25 non-root routes. That means a scanned QR link returns **HTT
 
 ---
 
-## 9. Deploy
+## 9. Deploy (GitHub Pages only)
 
-### Netlify
-
-1. New site → **Import from GitHub** → `tahasync/ucp-photography-club`.
-2. Build command `npm run build`, publish directory `dist` (already in `netlify.toml`).
-3. Deploy. SPA fallback and cache headers come from `netlify.toml` + `public/_redirects`.
-4. Add the custom domain in **Domain settings** when the club chooses one.
-
-### GitHub Pages
+Every push to `main` automatically rebuilds and republishes the site.
 
 1. Push the repository to `main`.
-2. **Settings → Pages → Build and deployment → Source: GitHub Actions.**
+2. **Settings → Pages → Build and deployment → Source: GitHub Actions** (already set).
 3. The included workflow (`.github/workflows/deploy.yml`) runs `npm run build:gh` (which sets
    `VITE_BASE=/ucp-photography-club/` from `.env.github`) and publishes `dist/`.
 4. Site: `https://tahasync.github.io/ucp-photography-club/`
+
+To use a custom domain later, add it under **Settings → Pages** and a `CNAME` file to
+`public/` — the rest of the build needs no change.
 
 Local check of the GitHub Pages build (base path + deep links):
 
@@ -354,7 +347,7 @@ rendered in production.
 
 | Symptom | Cause / fix |
 | --- | --- |
-| Deep link (e.g. `/vice-president`) shows a server 404 | SPA fallback missing: keep `netlify.toml` + `public/_redirects` (Netlify) or `dist/404.html` (GitHub Pages) and make sure Pages uses the GitHub Actions source |
+| Deep link (e.g. `/vice-president`) shows a server 404 | Build the GitHub Pages variant (`npm run build:gh`) so the route folders are generated, and confirm Pages uses the **GitHub Actions** source |
 | Blank page or 404s for assets on GitHub Pages | Base path mismatch — rebuild with `npm run build:gh`, or fix `VITE_BASE` |
 | Portrait not showing | File name/path must match `image` in `members.js`; missing files fall back to a neutral panel |
 | Old content after editing data | Rebuild (`npm run build`) — data is bundled at build time |
