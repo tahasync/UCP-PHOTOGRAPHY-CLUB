@@ -45,7 +45,7 @@
   /* Type */
   --font: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, Arial, sans-serif;
-  --fs-micro: 0.6875rem; /* 11px */
+  --fs-micro: 0.75rem; /* 12px — never below 12px (skill: typography scale) */
   --fs-small: 0.8125rem; /* 13px */
 }
 
@@ -122,6 +122,24 @@ blockquote {
   margin: 0;
 }
 
+/* Balanced display type, readable paragraphs (progressive enhancement). */
+h1,
+h2,
+h3,
+.display,
+.h-page,
+.name-large {
+  text-wrap: balance;
+}
+
+.lede,
+.person__bio,
+.small,
+.index-row__sub,
+.links__note {
+  text-wrap: pretty;
+}
+
 ul,
 ol {
   margin: 0;
@@ -160,6 +178,19 @@ a {
 :focus-visible {
   outline: 2px solid var(--red);
   outline-offset: 3px;
+}
+
+/* WCAG 2.2 focus-not-obscured: a focused control must never land under the
+   fixed header when tabbing or jumping to an anchor. */
+a,
+button,
+summary,
+input,
+textarea,
+select,
+[tabindex],
+[id] {
+  scroll-margin-top: calc(var(--header-h) + env(safe-area-inset-top) + 1.25rem);
 }
 
 .skip-link {
@@ -201,11 +232,13 @@ a {
   width: 100%;
   max-width: var(--maxw);
   margin-inline: auto;
-  padding-inline: var(--gutter);
+  /* Notched phones: keep content clear of the safe areas. */
+  padding-left: max(var(--gutter), env(safe-area-inset-left));
+  padding-right: max(var(--gutter), env(safe-area-inset-right));
 }
 
 .page {
-  padding-top: var(--header-h);
+  padding-top: calc(var(--header-h) + env(safe-area-inset-top));
   padding-bottom: clamp(3rem, 8vw, 7rem);
 }
 
@@ -391,7 +424,8 @@ a:focus-visible .u-line::after {
   left: 0;
   right: 0;
   z-index: 70;
-  height: var(--header-h);
+  height: calc(var(--header-h) + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
   background: var(--bg);
   border-bottom: 1px solid transparent;
   transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease),
@@ -589,11 +623,14 @@ a:focus-visible .u-line::after {
   flex-direction: column;
   justify-content: space-between;
   gap: 2rem;
-  padding: calc(var(--header-h) + clamp(1.5rem, 7vw, 3rem)) var(--gutter)
-    clamp(1.5rem, 5vw, 2.5rem);
+  padding: calc(var(--header-h) + env(safe-area-inset-top) + clamp(1.5rem, 7vw, 3rem))
+    max(var(--gutter), env(safe-area-inset-left))
+    calc(clamp(1.5rem, 5vw, 2.5rem) + env(safe-area-inset-bottom))
+    max(var(--gutter), env(safe-area-inset-right));
   background: var(--inverse-bg);
   color: var(--inverse-fg);
   overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .mobile-menu__list {
@@ -643,6 +680,7 @@ a:focus-visible .u-line::after {
   color: var(--inverse-fg);
   border-top: 2px solid var(--red);
   padding-block: clamp(2.5rem, 6vw, 4.5rem);
+  padding-bottom: calc(clamp(2.5rem, 6vw, 4.5rem) + env(safe-area-inset-bottom));
 }
 
 .site-footer__grid {
@@ -701,7 +739,7 @@ a:focus-visible .u-line::after {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  padding-top: var(--header-h);
+  padding-top: calc(var(--header-h) + env(safe-area-inset-top));
 }
 
 .cover__top {
@@ -744,11 +782,6 @@ a:focus-visible .u-line::after {
   display: block;
 }
 
-/* Small, consistent editorial indent on the middle word. */
-.cover__title > span:nth-child(2) {
-  padding-left: clamp(0.4rem, 1.8vw, 2rem);
-}
-
 .cover__aside {
   display: flex;
   flex-direction: column;
@@ -759,17 +792,9 @@ a:focus-visible .u-line::after {
 .cover__logo {
   width: clamp(150px, 16vw, 230px);
   height: auto;
-  /* The supplied logo has a transparent background plus a white splash, so on
-     dark pages it needs a clean, even plate. content-box keeps the artwork
-     at its intended size while the padding builds the plate around it. */
-  box-sizing: content-box;
-  background: var(--logo-plate, transparent);
-  padding: var(--logo-pad, 0);
-}
-
-[data-theme='dark'] {
-  --logo-plate: #ffffff;
-  --logo-pad: 14px;
+  /* The official logo keeps its original transparent background in both
+     themes: no plate, no padding, no recolouring. If a light-on-dark variant is
+     ever supplied, point BRANDING.logo at it (see README §6). */
 }
 
 .cover__statement {

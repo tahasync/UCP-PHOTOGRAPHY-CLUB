@@ -2,13 +2,13 @@ import { Link } from 'react-router-dom';
 import Seo from '../components/Seo.jsx';
 import PersonRow from '../components/PersonRow.jsx';
 import Arrow from '../components/Arrow.jsx';
-import Reveal from '../components/Reveal.jsx';
 import { CLUB } from '../data/site.js';
 import { patronsBody } from '../data/patrons.js';
 
 /**
  * Patrons Body — kept separate from the student executive body.
  * Official names have not been supplied, so the records remain placeholders.
+ * No reveal animation here: this page renders instantly.
  */
 export default function Patrons() {
   return (
@@ -25,12 +25,8 @@ export default function Patrons() {
         </div>
 
         <div className="page-head__title-row">
-          <Reveal as="h1" className="h-page">
-            Patrons
-          </Reveal>
-          <Reveal as="p" className="lede" delay={0.06}>
-            {patronsBody.note}
-          </Reveal>
+          <h1 className="h-page">Patrons</h1>
+          <p className="lede">{patronsBody.note}</p>
         </div>
       </header>
 

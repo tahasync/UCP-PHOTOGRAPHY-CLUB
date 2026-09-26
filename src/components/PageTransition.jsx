@@ -11,8 +11,12 @@ export default function PageTransition({ children, className = '' }) {
       className={className}
       initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
       animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-      exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -12 }}
-      transition={{ duration: DURATION.base, ease: EASE }}
+      exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -10 }}
+      transition={{
+        default: { duration: DURATION.base, ease: EASE },
+        // Exit is faster than enter: navigation must never feel like a wait.
+        exit: { duration: DURATION.fast, ease: EASE }
+      }}
     >
       {children}
     </motion.main>

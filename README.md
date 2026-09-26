@@ -46,6 +46,30 @@ To tweak a theme, edit `:root` and the `[data-theme='dark']` block at the top of
 
 ---
 
+## 1c. UI/UX Pro Max design skill
+
+[UI/UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) (MIT) is installed at
+`.claude/skills/ui-ux-pro-max/` — 50 active styles, 192 product palettes, 74 font pairings,
+119 UX guidelines and 22 stack profiles. It is the reference used for every UI/UX decision
+in this project, and `.clinerules/ui-ux-pro-max.md` applies its priority order
+(accessibility → touch → performance → style → layout → type → animation).
+
+The skill's own `scripts/search.py` needs Python. This repo includes a Node equivalent that
+reads the same CSV data, so it works anywhere:
+
+```bash
+node scripts/uipro-search.mjs "focus keyboard target" --domain ux
+node scripts/uipro-search.mjs "editorial minimal" --domain style
+node scripts/uipro-search.mjs "dark mode contrast" --domain color
+node scripts/uipro-search.mjs "lazy image bundle" --stack react
+```
+
+Matching style for this site: **`exaggerated-minimalism`** (oversized `clamp()` type, extreme
+whitespace, black/white + one accent, light & dark supported, "best for portfolios,
+editorial"). Brand rules from the club override the generic database where they differ.
+
+---
+
 ## 2. Install & run
 
 ```bash

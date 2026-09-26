@@ -4,56 +4,78 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 /**
- * Emits `dist/404.html` and pre-generates `dist/<route>/index.html` for all
- * defined application routes.
+ * Build-time finishing touches:
  *
- * This completely eliminates the browser console 404 error when navigating
- * or hard-refreshing directly on GitHub Pages (e.g. /vice-president), while
- * keeping the fallback 404.html for truly unknown routes.
+ * 1. Preloads the single Inter subset so the first paint never shows fallback
+ *    type (the display headline is the whole first impression).
+ * 2. Emits `dist/404.html` as a safety net for unknown URLs.
+ * 3. Pre-renders a real HTML file for every route, so a scanned QR link
+ *    (e.g. /vice-president) answers HTTP 200 on any static host with no 404
+ *    request in the browser console.
  */
-function staticRoutesPlugin(base) {
+function buildFinishingPlugin(base) {
+  const writeStaticRoutes = async () => {
+    const distDir = path.resolve(process.cwd(), 'dist');
+    const indexPath = path.join(distDir, 'index.html');
+    if (!fs.existsSync(indexPath)) return;
+
+    const html = fs.readFileSync(indexPath, 'utf8');
+    const { memberRoutes } = await import('./src/data/members.js');
+    const { departmentRoutes } = await import('./src/data/hierarchy.js');
+
+    const allRoutes = [
+      'present-body',
+      'patrons',
+      'hierarchy',
+      ...departmentRoutes,
+      ...memberRoutes
+    ];
+
+    for (const route of allRoutes) {
+      // Folder form: works with any static server and SPA fallback.
+      const dir = path.join(distDir, route);
+      fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(path.join(dir, 'index.html'), html);
+
+      // Flat file form: GitHub Pages answers /vice-president with 200
+      // instead of a 301 redirect to /vice-president/.
+      fs.writeFileSync(path.join(distDir, `${route}.html`), html);
+    }
+  };
+
   return {
-    name: 'upc-static-routes-plugin',
+    name: 'upc-build-finishing',
     apply: 'build',
-    async closeBundle() {
-      const distDir = path.resolve(process.cwd(), 'dist');
-      const indexHtmlPath = path.join(distDir, 'index.html');
-      if (!fs.existsSync(indexHtmlPath)) return;
+    // Run after Vite's HTML plugin so index.html exists in the bundle.
+    enforce: 'post',
 
-      const htmlContent = fs.readFileSync(indexHtmlPath, 'utf8');
+    generateBundle(_options, bundle) {
+      const fontFile = Object.keys(bundle).find((name) => name.endsWith('.woff2'));
+      const indexAsset = bundle['index.html'];
 
-      // 1. Emit 404.html
-      const templatePath = path.resolve(process.cwd(), 'scripts', '404.template.html');
-      if (fs.existsSync(templatePath)) {
-        const template = fs.readFileSync(templatePath, 'utf8');
-        fs.writeFileSync(path.join(distDir, '404.html'), template.replaceAll('__BASE__', base));
+      if (fontFile && indexAsset) {
+        const href = `${base}${fontFile}`.replace(/\/{2,}/g, '/');
+        const preload = `<link rel="preload" href="${href}" as="font" type="font/woff2" crossorigin />`;
+        indexAsset.source = indexAsset.source
+          .toString()
+          .replace('</title>', `</title>\n    ${preload}`);
       }
 
-      // 2. Pre-generate static files for all valid routes
+      const templatePath = path.resolve(process.cwd(), 'scripts', '404.template.html');
+      if (fs.existsSync(templatePath)) {
+        this.emitFile({
+          type: 'asset',
+          fileName: '404.html',
+          source: fs.readFileSync(templatePath, 'utf8').replaceAll('__BASE__', base)
+        });
+      }
+    },
+
+    async closeBundle() {
       try {
-        const { memberRoutes } = await import('./src/data/members.js');
-        const { departmentRoutes } = await import('./src/data/hierarchy.js');
-
-        const allRoutes = [
-          'present-body',
-          'patrons',
-          'hierarchy',
-          ...departmentRoutes,
-          ...memberRoutes
-        ];
-
-        for (const route of allRoutes) {
-          // Folder form (works with any static server / SPA fallback).
-          const targetDir = path.join(distDir, route);
-          fs.mkdirSync(targetDir, { recursive: true });
-          fs.writeFileSync(path.join(targetDir, 'index.html'), htmlContent);
-
-          // Flat file form: GitHub Pages answers /vice-president with 200
-          // instead of a 301 redirect to /vice-president/.
-          fs.writeFileSync(path.join(distDir, `${route}.html`), htmlContent);
-        }
-      } catch (err) {
-        console.error('Failed to pre-generate static route files:', err);
+        await writeStaticRoutes();
+      } catch (error) {
+        console.error('Failed to pre-generate static route files:', error);
       }
     }
   };
@@ -66,7 +88,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     base,
-    plugins: [react(), staticRoutesPlugin(base)],
+    plugins: [react(), buildFinishingPlugin(base)],
     server: { port: 5173, open: false },
     build: {
       target: 'es2019',

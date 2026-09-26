@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
 import Seo from '../components/Seo.jsx';
-import Reveal from '../components/Reveal.jsx';
 import Arrow from '../components/Arrow.jsx';
 import HierarchySection from '../components/HierarchySection.jsx';
 import { CLUB } from '../data/site.js';
 import { departments, teamCount } from '../data/hierarchy.js';
 
-/** The 2026–27 hierarchy: five teams, each linking to its positions. */
+/**
+ * The 2026–27 hierarchy: five teams, each linking to its positions.
+ * No reveal animation here: this page renders instantly.
+ */
 export default function Hierarchy() {
   return (
     <div className="shell">
@@ -24,13 +26,11 @@ export default function Hierarchy() {
         </div>
 
         <div className="page-head__title-row">
-          <Reveal as="h1" className="h-page">
-            Hierarchy
-          </Reveal>
-          <Reveal as="p" className="lede" delay={0.06}>
+          <h1 className="h-page">Hierarchy</h1>
+          <p className="lede">
             The 2026–27 hierarchy is organised into {teamCount} teams, each led by a
             director and reporting alongside the President Body.
-          </Reveal>
+          </p>
         </div>
       </header>
 
