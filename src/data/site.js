@@ -41,6 +41,14 @@ export const CONTENT_STATUS = {
   logo: 'supplied'
 };
 
+/**
+ * The club's own official accounts, shown in the footer.
+ * Add more channels by extending this object.
+ */
+export const CLUB_LINKS = {
+  instagram: 'https://www.instagram.com/upcofficials'
+};
+
 /** Build a public/ asset URL that survives a GitHub Pages base path. */
 export const asset = (p) =>
   `${import.meta.env.BASE_URL}${String(p || '').replace(/^\//, '')}`;

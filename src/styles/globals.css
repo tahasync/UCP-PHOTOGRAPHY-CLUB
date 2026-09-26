@@ -1949,6 +1949,46 @@ a.cta-row:focus-visible .cta-row__arrow {
   transform: translateY(-2px);
 }
 
+.site-footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1rem;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.site-footer__social-label {
+  font-size: var(--fs-micro);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--inverse-muted);
+}
+
+.site-footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 44px;
+  padding: 0 1.15rem;
+  border: 1px solid var(--inverse-line);
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.05);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.site-footer__social-link:hover,
+.site-footer__social-link:focus-visible {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
 .site-footer__bottom {
   display: flex;
   flex-wrap: wrap;

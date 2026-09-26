@@ -73,7 +73,13 @@ export const members = {
     bio: 'Serving as Vice President of the UCP Photography Club for the 2026–27 tenure, working alongside the executive body and supporting the club’s creative and operational teams.',
     bioIsPlaceholder: true,
     role: '',
-    links: emptyLinks()
+    links: {
+      instagram: 'https://www.instagram.com/heyitxtaha',
+      linkedin: 'https://www.linkedin.com/in/heyitxtaha',
+      github: 'https://github.com/tahasync',
+      portfolio: '',
+      email: ''
+    }
   },
 
   /* ---------------------------------------------------------------- *

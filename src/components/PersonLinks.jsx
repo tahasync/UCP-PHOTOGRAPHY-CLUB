@@ -1,10 +1,11 @@
 import Arrow from './Arrow.jsx';
 
-const ORDER = ['instagram', 'linkedin', 'portfolio', 'email'];
+const ORDER = ['instagram', 'linkedin', 'github', 'portfolio', 'email'];
 
 const LABELS = {
   instagram: 'Instagram',
   linkedin: 'LinkedIn',
+  github: 'GitHub',
   portfolio: 'Portfolio',
   email: 'Email'
 };
@@ -23,8 +24,8 @@ export default function PersonLinks({ member }) {
     return (
       <div className="links">
         <p className="links__note">
-          Approved Instagram, LinkedIn and email links for {member.name} will appear
-          here once they are supplied for the 2026–27 tenure.
+          Approved Instagram, LinkedIn, GitHub and email links for {member.name} will
+          appear here once they are supplied for the 2026–27 tenure.
         </p>
       </div>
     );

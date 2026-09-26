@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
-import { CLUB } from '../data/site.js';
+import Arrow from './Arrow.jsx';
+import { CLUB, CLUB_LINKS } from '../data/site.js';
 import { NAV_ITEMS } from '../data/navigation.js';
 
-/** Deliberately small: wordmark, three links, one line of legal text. */
+/** Deliberately small: wordmark, navigation, official accounts, legal line. */
 export default function Footer() {
   return (
     <footer className="site-footer">
@@ -24,6 +25,21 @@ export default function Footer() {
             ))}
           </nav>
         </div>
+
+        {CLUB_LINKS.instagram ? (
+          <nav className="site-footer__social" aria-label="Official club accounts">
+            <span className="site-footer__social-label">Follow the club</span>
+            <a
+              className="site-footer__social-link"
+              href={CLUB_LINKS.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="u-line">@upcofficials</span>
+              <Arrow direction="up-right" />
+            </a>
+          </nav>
+        ) : null}
 
         <div className="site-footer__bottom">
           <span>© {CLUB.name} {CLUB.tenure}</span>
