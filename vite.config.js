@@ -29,7 +29,7 @@ function staticRoutesPlugin(base) {
         fs.writeFileSync(path.join(distDir, '404.html'), template.replaceAll('__BASE__', base));
       }
 
-      // 2. Pre-generate physical directories with index.html for all valid routes
+      // 2. Pre-generate static files for all valid routes
       try {
         const { memberRoutes } = await import('./src/data/members.js');
         const { departmentRoutes } = await import('./src/data/hierarchy.js');
@@ -43,9 +43,14 @@ function staticRoutesPlugin(base) {
         ];
 
         for (const route of allRoutes) {
+          // Folder form (works with any static server / SPA fallback).
           const targetDir = path.join(distDir, route);
           fs.mkdirSync(targetDir, { recursive: true });
           fs.writeFileSync(path.join(targetDir, 'index.html'), htmlContent);
+
+          // Flat file form: GitHub Pages answers /vice-president with 200
+          // instead of a 301 redirect to /vice-president/.
+          fs.writeFileSync(path.join(distDir, `${route}.html`), htmlContent);
         }
       } catch (err) {
         console.error('Failed to pre-generate static route files:', err);
