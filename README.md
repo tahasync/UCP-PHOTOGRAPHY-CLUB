@@ -290,7 +290,7 @@ and so on for all 25 non-root routes. That means a scanned QR link returns **HTT
 
 ### Netlify
 
-1. New site → **Import from GitHub** → `tahasync/UCP-PHOTOGRAPHY-CLUB`.
+1. New site → **Import from GitHub** → `tahasync/ucp-photography-club`.
 2. Build command `npm run build`, publish directory `dist` (already in `netlify.toml`).
 3. Deploy. SPA fallback and cache headers come from `netlify.toml` + `public/_redirects`.
 4. Add the custom domain in **Domain settings** when the club chooses one.
@@ -300,8 +300,8 @@ and so on for all 25 non-root routes. That means a scanned QR link returns **HTT
 1. Push the repository to `main`.
 2. **Settings → Pages → Build and deployment → Source: GitHub Actions.**
 3. The included workflow (`.github/workflows/deploy.yml`) runs `npm run build:gh` (which sets
-   `VITE_BASE=/UCP-PHOTOGRAPHY-CLUB/` from `.env.github`) and publishes `dist/`.
-4. Site: `https://tahasync.github.io/UCP-PHOTOGRAPHY-CLUB/`
+   `VITE_BASE=/ucp-photography-club/` from `.env.github`) and publishes `dist/`.
+4. Site: `https://tahasync.github.io/ucp-photography-club/`
 
 Local check of the GitHub Pages build (base path + deep links):
 
