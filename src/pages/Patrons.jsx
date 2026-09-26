@@ -14,7 +14,7 @@ export default function Patrons() {
   return (
     <div className="shell">
       <Seo
-        title="Patrons Body — 2026–27"
+        title="Patrons Body, 2026–27"
         description="The Patrons Body of the UCP Photography Club for the 2026–27 tenure."
       />
 

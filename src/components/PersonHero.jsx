@@ -68,7 +68,7 @@ export default function PersonHero({ member, relatedLabel, browseTo, browseLabel
           {member.bio}
           {member.bioIsPlaceholder ? (
             <span className="person__bio-note label">
-              Placeholder introduction — awaiting approved copy.
+              Placeholder introduction. Awaiting approved copy.
             </span>
           ) : null}
         </p>

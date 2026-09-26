@@ -11,7 +11,7 @@ export default function PresentBody() {
   return (
     <div className="shell">
       <Seo
-        title="Present Body — 2026–27"
+        title="Present Body, 2026–27"
         description="The President and Vice President of the UCP Photography Club, Executive Body 2026–27."
       />
 

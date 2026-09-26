@@ -53,8 +53,8 @@ export default function Person({ slug }) {
   return (
     <div className="shell">
       <Seo
-        title={`${member.name} — ${member.position}`}
-        description={`${member.name}, ${member.position} — ${CLUB.name} ${CLUB.tenure}.`}
+        title={`${member.name}, ${member.position}`}
+        description={`${member.name}, ${member.position}. ${CLUB.name}, ${CLUB.tenure}.`}
         image={member.imagePlaceholder ? undefined : member.image}
       />
 

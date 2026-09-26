@@ -13,7 +13,7 @@ export default function PersonRow({ member, num, meta }) {
     <Link
       className="index-row person-row"
       to={member.path}
-      aria-label={`${member.name}${pending}, ${member.position} — open profile`}
+      aria-label={`${member.name}${pending}, ${member.position}. Open profile`}
     >
       {num ? (
         <span className="index-row__num tnum" aria-hidden="true">

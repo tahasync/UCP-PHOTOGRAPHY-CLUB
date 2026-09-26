@@ -11,7 +11,7 @@ export default function Hierarchy() {
   return (
     <div className="shell">
       <Seo
-        title="Hierarchy — 2026–27"
+        title="Hierarchy, 2026–27"
         description={`The ${teamCount} teams of the UCP Photography Club hierarchy for 2026–27: ${departments
           .map((department) => department.name)
           .join(', ')}.`}

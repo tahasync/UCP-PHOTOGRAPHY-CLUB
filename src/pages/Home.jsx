@@ -32,8 +32,8 @@ export default function Home() {
   return (
     <>
       <Seo
-        title="UCP Photography Club — 2026–27"
-        description="UCP Photography Club Executive Body and Leadership — 2026–27"
+        title="UCP Photography Club, 2026–27"
+        description="UCP Photography Club Executive Body and Leadership, 2026–27"
       />
 
       <section className="cover">
@@ -68,7 +68,7 @@ export default function Home() {
             </Reveal>
 
             <Reveal as="p" className="small" delay={0.34}>
-              The current digital directory of the UCP Photography Club Executive Body —
+              The current digital directory of the UCP Photography Club Executive Body,
               2026–27.
             </Reveal>
           </div>
@@ -131,7 +131,7 @@ export default function Home() {
 
           <Reveal as="p" className="manifesto__note" delay={0.08}>
             Every position listed on this site links to that person’s digital identity
-            page — the destination behind their printed UPC card. Nothing from earlier
+            page, the destination behind their printed UPC card. Nothing from earlier
             tenures appears here.
           </Reveal>
 

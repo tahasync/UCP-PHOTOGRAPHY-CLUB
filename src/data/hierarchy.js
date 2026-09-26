@@ -16,7 +16,7 @@ export const departments = [
     route: '/operations',
     // TODO: Replace with the approved Operations team introduction.
     intro:
-      'The Operations team keeps the club running — coordinating logistics, resources and event execution across the 2026–27 tenure.',
+      'The Operations team keeps the club running, coordinating logistics, resources and event execution across the 2026–27 tenure.',
     introIsPlaceholder: true
   },
   {
@@ -36,7 +36,7 @@ export const departments = [
     route: '/comms',
     // TODO: Replace with the approved Communication And Publication introduction.
     intro:
-      'The Communication And Publication team handles the club’s written voice — publications, announcements and the communication that connects UPC with its members.',
+      'The Communication And Publication team handles the club’s written voice. It covers publications, announcements and the communication that connects UPC with its members.',
     introIsPlaceholder: true
   },
   {
@@ -56,7 +56,7 @@ export const departments = [
     route: '/creatives',
     // TODO: Replace with the approved Graphics and Art And Craft introduction.
     intro:
-      'The Graphics and Art And Craft team shapes the club’s visual and material design — graphics, art and craft for campaigns, events and the tenure’s identity.',
+      'The Graphics and Art And Craft team shapes the club’s visual and material design, covering graphics, art and craft for campaigns, events and the tenure’s identity.',
     introIsPlaceholder: true
   }
 ];

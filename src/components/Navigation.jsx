@@ -37,7 +37,7 @@ export default function Navigation() {
     <>
       <header className={headerClass}>
         <div className="shell site-header__inner">
-          <Link className="wordmark" to="/" aria-label="UCP Photography Club — home">
+          <Link className="wordmark" to="/" aria-label="UCP Photography Club home">
             <span className="wordmark__text">UPC</span>
             <span className="wordmark__rule" aria-hidden="true" />
           </Link>

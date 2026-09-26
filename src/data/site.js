@@ -13,7 +13,7 @@ export const CLUB = {
   coverLines: ['UCP', 'Photography', 'Club'],
   statement: 'Capture. Create. Connect.',
   description:
-    'UCP Photography Club Executive Body and Leadership — 2026–27',
+    'UCP Photography Club Executive Body and Leadership, 2026–27',
   // Tenure is written with an en dash, matching the club's own documents.
   tenure: '2026–27'
 };

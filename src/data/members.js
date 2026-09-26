@@ -342,7 +342,7 @@ export const members = {
     order: 1,
     ...portrait(1),
     // TODO: Replace placeholder bio once the official Patron is confirmed.
-    bio: 'PLACEHOLDER — The Patron’s introduction will be published once the official name and approved copy are provided.',
+    bio: 'PLACEHOLDER. The Patron’s introduction will be published once the official name and approved copy are provided.',
     bioIsPlaceholder: true,
     role: '',
     links: emptyLinks()
@@ -361,7 +361,7 @@ export const members = {
     order: 2,
     ...portrait(3),
     // TODO: Replace placeholder bio once the official Co-Patron is confirmed.
-    bio: 'PLACEHOLDER — The Co-Patron’s introduction will be published once the official name and approved copy are provided.',
+    bio: 'PLACEHOLDER. The Co-Patron’s introduction will be published once the official name and approved copy are provided.',
     bioIsPlaceholder: true,
     role: '',
     links: emptyLinks()

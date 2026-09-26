@@ -35,7 +35,7 @@ export default function Seo({ title, description, image, noindex = false }) {
       ? title.includes(CLUB.name)
         ? title
         : `${title} | ${CLUB.name}`
-      : `${CLUB.name} — ${CLUB.tenure}`;
+      : `${CLUB.name}, ${CLUB.tenure}`;
     const desc = description || CLUB.description;
     const ogImage = asset(image || BRANDING.ogImage);
     const url = `${window.location.origin}${window.location.pathname}`;

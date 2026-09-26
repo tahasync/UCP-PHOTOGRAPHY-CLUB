@@ -28,7 +28,7 @@ export default function Department({ slug }) {
   return (
     <div className="shell">
       <Seo
-        title={`${department.name} Team — 2026–27`}
+        title={`${department.name} Team, 2026–27`}
         description={`The ${department.name} team of the UCP Photography Club, 2026–27.`}
       />
 
@@ -54,7 +54,7 @@ export default function Department({ slug }) {
             <p className="lede">{department.intro}</p>
             {department.introIsPlaceholder ? (
               <p className="person__bio-note label">
-                Placeholder introduction — awaiting approved copy.
+                Placeholder introduction. Awaiting approved copy.
               </p>
             ) : null}
           </Reveal>
