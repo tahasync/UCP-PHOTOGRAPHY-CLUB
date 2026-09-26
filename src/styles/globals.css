@@ -552,8 +552,10 @@ a:focus-visible .u-line::after {
   background: var(--surface-2);
 }
 
+/* Active chip: strong fill with the page background as the label colour, so it
+   stays readable in both themes (--inverse-* is reserved for fixed dark panels). */
 .nav__link[aria-current='page'] {
-  color: var(--inverse-fg);
+  color: var(--bg);
   background: var(--fg);
 }
 
@@ -1131,8 +1133,9 @@ a.index-row:focus-visible .index-row__title {
 }
 
 @media (min-width: 768px) {
+  /* num | body | meta (+ preview when the row has one) */
   .index-row {
-    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    grid-template-columns: auto minmax(0, 1fr) auto;
   }
 
   .index-row__num,
@@ -1150,9 +1153,11 @@ a.index-row:focus-visible .index-row__title {
 }
 
 @media (min-width: 1024px) and (hover: hover) {
+  /* Four children: num | body | meta | portrait. The portrait column is a fixed
+     reservation, so the hover image can never stretch the row. */
   .person-row--preview {
     --preview-w: clamp(96px, 9vw, 150px);
-    grid-template-columns: auto minmax(0, 1fr) auto auto var(--preview-w);
+    grid-template-columns: auto minmax(0, 1fr) auto var(--preview-w);
     column-gap: clamp(1rem, 2.4vw, 2rem);
   }
 
