@@ -208,7 +208,7 @@ export const members = {
     body: 'Communication And Publication',
     group: 'hierarchy',
     departmentSlug: 'comms',
-    order: 1,
+    order: 2,
     ...portrait(1),
     // TODO: Replace placeholder bio after hierarchy shoot / content collection.
     bio: 'Directing publications for the 2026–27 tenure, shaping how the club’s work is written, published and documented.',
@@ -226,7 +226,7 @@ export const members = {
     body: 'Communication And Publication',
     group: 'hierarchy',
     departmentSlug: 'comms',
-    order: 2,
+    order: 3,
     ...portrait(2),
     // TODO: Replace placeholder bio after hierarchy shoot / content collection.
     bio: 'Serving as Deputy Director Publications for the 2026–27 tenure, supporting the club’s written output across the tenure.',
@@ -244,7 +244,7 @@ export const members = {
     body: 'Communication And Publication',
     group: 'hierarchy',
     departmentSlug: 'comms',
-    order: 3,
+    order: 1,
     ...portrait(3),
     // TODO: Replace placeholder bio after hierarchy shoot / content collection.
     bio: 'Directing communications for the 2026–27 tenure, coordinating the club’s messaging and announcements.',
